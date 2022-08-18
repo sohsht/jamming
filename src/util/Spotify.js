@@ -1,4 +1,4 @@
-const redirectUri = 'jobless-eggnog.surge.sh'
+const redirectUri = 'https://jobless-eggnog.surge.sh'
 let accessToken;
 
 
