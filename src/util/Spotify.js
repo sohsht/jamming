@@ -1,7 +1,11 @@
-const redirectUri = 'http://localhost:3000/'
+const redirectUri = 'jobless-eggnog.surge.sh'
 let accessToken;
 
+
 const Spotify = {
+    // Uses Implicit Grant Flow as it requires no server side code.
+    // Will return a accessToken. If accessToken does not currently exsist, will redirect you to login to spotify
+    // then take the accesstoken from the returned query and clear the query after stored. 
     getAccessToken() {
         if (accessToken) {
             return accessToken;
@@ -23,6 +27,7 @@ const Spotify = {
         }
     },
 
+    // Will return a array of track objects from Spotify that align with the parameter term.
     search(term) {
         const accessToken = Spotify.getAccessToken();
         return fetch(`https://api.spotify.com/v1/search?type=track&q=${term}`, {
@@ -45,6 +50,8 @@ const Spotify = {
         });
     },
 
+    // This method given the name of the playlist and array of spotify track URI's, 
+    // will save the playlist to your Spotify account. 
     savePlaylist(name, trackUris) {
         if (!name || !trackUris.length) {
             return;
